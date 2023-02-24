@@ -1,0 +1,182 @@
+<h2 mat-dialog-title>Detalle de registro</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="container-fluid">
+    <h3>Datos Generales</h3>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Fecha Inicio</strong>
+      </div>
+      <div class="col-md">
+        {{getFormatDate(data.datosGenerales.fechaInicio)}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Fecha Fin</strong>
+      </div>
+      <div class="col-md">
+        {{getFormatDate(data.datosGenerales.fechaFin)}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Número de tanque</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosGenerales.numeroTanque}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Proveedor</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosGenerales.proveedor}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Sello planta</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosGenerales.selloPlanta}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Sello proveedor</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosGenerales.selloProveedor}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Tanque funcionando</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosGenerales.tanqueFuncionando ? 'Si':'No'}}
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container-fluid">
+    <h3>Datos Calidad</h3>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Aceptación</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosCalidad.aceptacion ? 'Si' : 'No'}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Antibiótico</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosCalidad.antibiotico ? 'Presente' : 'Ausente'}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Densidad</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosCalidad.densidad}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Organolepticas</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosCalidad.organolepticas ? 'Presente' : 'Ausente'}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Prueba de Alcohol</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosCalidad.pruebaAlcohol ? 'Presente' : 'Ausente'}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Temperatura</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosCalidad.temperatura}} C
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Tirilla</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosCalidad.urlTirilla}}
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container-fluid">
+    <h3>Datos Calidad</h3>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Cantidad recolectada</strong>
+      </div>
+      <div class="col-md">
+        {{data.volumen.cantidadRecolectada}} Lts
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Fraccion</strong>
+      </div>
+      <div class="col-md">
+        {{data.volumen.fraccion}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Pulgadas</strong>
+      </div>
+      <div class="col-md">
+        {{data.volumen.pulgadas}}
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container-fluid">
+    <h3>Datos Oficina</h3>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Código SAP</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosOficina.codigoSAP}} Lts
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Observaciones</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosOficina.observaciones}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <strong>Firma Proveedor</strong>
+      </div>
+      <div class="col-md">
+        {{data.datosOficina.urlFirmaProveedor}}
+      </div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Aceptar</button>
+</mat-dialog-actions>

@@ -1,1 +1,100 @@
-<p>main-report works!</p>
+<div class="row">
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>Sistema de control de recolección</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item><mat-icon>face</mat-icon>
+        <span>Perfil</span></button>
+      <button mat-menu-item><mat-icon>power_settings_new</mat-icon>
+        <span>Cerrar sesión</span></button>
+    </mat-menu>
+
+  </mat-toolbar>
+</div>
+<br>
+<div class="container-md">
+  <h2 align="center">
+    Reporte de recolección
+  </h2>
+
+  <form [formGroup]="form" (ngSubmit)="consultarPorFechas(form)" autocomplete="off">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label>Ingrese un rango de fechas</mat-label>
+          <mat-date-range-input [formGroup]="form" [rangePicker]="picker">
+            <input matStartDate formControlName="start" placeholder="Start date">
+            <input matEndDate formControlName="end" placeholder="End date">
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+          <mat-error *ngIf="form.controls['start'].hasError('matStartDateInvalid')">Fecha inicio inválida</mat-error>
+          <mat-error *ngIf="form.controls['end'].hasError('matEndDateInvalid')">Fecha fin inválida</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Consultar</button>
+
+      </div>
+    </div>
+  </form>
+
+  <br>
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <input matInput type="text" placeholder="Presione par filtrar la información" (keyup)="updateFilter($event)" />
+      </mat-form-field>
+    </div>
+    <div class="col-sm">
+      <button mat-raised-button color="primary">
+        <mat-icon matSuffix>cloud_download</mat-icon>
+        Descargar CSV</button>
+    </div>
+
+  </div>
+
+
+  <ngx-datatable #table class="material" [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50"
+    rowHeight="auto" [limit]="10" [rows]="rows">
+    <ngx-datatable-column name="Fecha informe">
+      <ng-template let-column="column" ngx-datatable-header-template> Fecha informe </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ getFormatDate(row.datosGenerales.fechaFin) }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Responsable">
+      <ng-template let-column="column" ngx-datatable-header-template> Responsable </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        {{ row.datosGenerales.numeroTanque }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Estado recolección">
+      <ng-template let-column="column" ngx-datatable-header-template> Estado recolección </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <p><mat-icon matSuffix>{{row.datosCalidad.aceptacion ? 'done' : 'clear' }}</mat-icon>
+          {{getEstadoRecoleccion(row.datosCalidad.aceptacion)}}</p>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Detalles">
+      <ng-template let-column="column" ngx-datatable-header-template> Detalles </ng-template>
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button mat-button color="primary" (click)="openDetails(row)">
+          <mat-icon matSuffix>remove_red_eye</mat-icon>Ver detalles</button>
+      </ng-template>
+    </ngx-datatable-column>
+
+  </ngx-datatable>
+</div>

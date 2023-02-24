@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,13 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) {}
+  form: FormGroup = new FormGroup({});
+  flag = true;
+
+  constructor(private fb: FormBuilder, private router: Router) { }
+
   ngOnInit(): void {
-    console.log('holi');
-    // throw new Error('Method not implemented.');
+    this.form = this.fb.group({
+      userName: [null, [Validators.required, Validators.minLength(3)]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
+    });
   }
 
-  redirect() {
+  saveDetails(form: any) {
+    console.log(form)
     sessionStorage.setItem('loginStatus', 'true');
     this.router.navigate(['report']);
   }
