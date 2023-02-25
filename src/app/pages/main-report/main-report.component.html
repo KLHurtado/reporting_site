@@ -11,7 +11,7 @@
     <mat-menu #menu="matMenu">
       <button mat-menu-item><mat-icon>face</mat-icon>
         <span>Perfil</span></button>
-      <button mat-menu-item><mat-icon>power_settings_new</mat-icon>
+      <button mat-menu-item (click)="logout()"><mat-icon>power_settings_new</mat-icon>
         <span>Cerrar sesión</span></button>
     </mat-menu>
 
@@ -76,15 +76,15 @@
     <ngx-datatable-column name="Responsable">
       <ng-template let-column="column" ngx-datatable-header-template> Responsable </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template>
-        {{ row.datosGenerales.numeroTanque }}
+        JUAN MANUEL HURTADO GORDILLO
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="Estado recolección">
       <ng-template let-column="column" ngx-datatable-header-template> Estado recolección </ng-template>
       <ng-template let-row="row" ngx-datatable-cell-template>
-        <p><mat-icon matSuffix>{{row.datosCalidad.aceptacion ? 'done' : 'clear' }}</mat-icon>
-          {{getEstadoRecoleccion(row.datosCalidad.aceptacion)}}</p>
+        <button class="disable-click" mat-button  (click)="openDetails(row)">
+          <mat-icon matSuffix>{{row.datosCalidad.aceptacion ? 'done' : 'clear' }}</mat-icon>{{getEstadoRecoleccion(row.datosCalidad.aceptacion)}}</button>
       </ng-template>
     </ngx-datatable-column>
 

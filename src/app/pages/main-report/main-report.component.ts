@@ -45,7 +45,7 @@ export class MainReportComponent implements OnInit {
   }
 
   getFormatDate(timestamp: number) {
-    return moment(new Date(timestamp)).format('DD/MM/YYYY')
+    return moment(new Date(timestamp*1000)).format('DD/MM/YYYY')
   }
 
   getEstadoRecoleccion(estadoRecoleccion: boolean) {
